@@ -23,7 +23,12 @@ public class UserServlet extends HttpServlet {
 
         UserDAO userDAO = new UserDAO();
 
-        List<User> listUser = userDAO.selectAllUsers();
+        List<User> listUser = null;
+        try {
+            listUser = userDAO.selectAllUsers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         for(User u: listUser){
             out.println("<tr>");
